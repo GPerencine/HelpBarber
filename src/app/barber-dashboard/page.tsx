@@ -372,25 +372,25 @@ export default function BarberDashboardPage() {
               <DialogTitle>{editingService ? 'Editar' : 'Novo'} Serviço</DialogTitle>
             </DialogHeader>
             <form onSubmit={form.handleSubmit(onServiceSubmit)} className="space-y-4 pt-4">
-              <div className="space-y-2">
-                <label className="text-sm font-bold uppercase text-muted-foreground">
+              <label className="space-y-2 block">
+                <span className="text-sm font-bold uppercase text-muted-foreground block">
                   Nome do Serviço
-                </label>
+                </span>
                 <Input placeholder="Ex: Corte Degrade" {...form.register('name')} />
-              </div>
+              </label>
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase text-muted-foreground">
+                <label className="space-y-2 block">
+                  <span className="text-sm font-bold uppercase text-muted-foreground block">
                     Preço (R$)
-                  </label>
+                  </span>
                   <Input type="number" step="0.01" {...form.register('price')} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold uppercase text-muted-foreground">
+                </label>
+                <label className="space-y-2 block">
+                  <span className="text-sm font-bold uppercase text-muted-foreground block">
                     Duração (min)
-                  </label>
+                  </span>
                   <Input type="number" {...form.register('duration')} />
-                </div>
+                </label>
               </div>
               <Button type="submit" className="w-full text-lg h-12" disabled={isSaving}>
                 {isSaving ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : 'Salvar Alterações'}

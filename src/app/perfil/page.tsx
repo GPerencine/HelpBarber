@@ -187,11 +187,12 @@ export default function PerfilPage() {
                 <div className="flex flex-col items-center gap-6 py-6">
                   <div className="flex justify-center gap-4">
                     {genericAvatars.map((avatar) => (
-                      <div
+                      <button
                         key={avatar.id}
+                        type="button"
                         onClick={() => handleUpdateAvatar(avatar.id)}
                         className={cn(
-                          'relative cursor-pointer rounded-full overflow-hidden border-4 transition-all hover:opacity-100',
+                          'relative cursor-pointer rounded-full overflow-hidden border-4 transition-all hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary',
                           profileData?.profilePictureId === avatar.id
                             ? 'border-primary opacity-100'
                             : 'border-transparent opacity-60',
@@ -210,7 +211,7 @@ export default function PerfilPage() {
                             <Check className="text-white h-8 w-8" />
                           </div>
                         )}
-                      </div>
+                      </button>
                     ))}
                   </div>
 
@@ -246,15 +247,15 @@ export default function PerfilPage() {
         <CardContent className="pt-8 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
+              <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider block">
                 Nome
-              </label>
+              </span>
               <p className="text-lg font-medium p-3 bg-muted/30 rounded-lg">{profileData?.name}</p>
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
+              <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider block">
                 Email
-              </label>
+              </span>
               <p className="text-lg font-medium p-3 bg-muted/30 rounded-lg">{profileData?.email}</p>
             </div>
           </div>

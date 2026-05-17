@@ -98,9 +98,8 @@ export default function LandingPage() {
             {/* Subtitle */}
             <p className="mb-10 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
               Encontre os melhores barbeiros da sua região, agende com um toque e descubra o corte
-              ideal com nosso
+              ideal com nosso{' '}
               <strong className="text-foreground">
-                {' '}
                 Consultor de Estilo com Inteligência Artificial
               </strong>
               .

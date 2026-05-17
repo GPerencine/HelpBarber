@@ -48,18 +48,34 @@ export default function Rating({
       aria-label={`Avaliação: ${rating} de ${totalStars} estrelas`}
       onMouseLeave={handleMouseLeave}
     >
-      {Array.from({ length: totalStars }, (_, i) => (
-        <Star
-          key={i}
-          size={size}
-          className={cn(
-            'transition-colors',
-            i < displayRating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300',
-          )}
-          onClick={() => handleClick(i)}
-          onMouseEnter={() => handleMouseEnter(i)}
-        />
-      ))}
+      {Array.from({ length: totalStars }, (_, i) => {
+        const starElement = (
+          <Star
+            size={size}
+            className={cn(
+              'transition-colors',
+              i < displayRating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300',
+            )}
+          />
+        );
+
+        if (interactive) {
+          return (
+            <button
+              key={i}
+              type="button"
+              className="focus:outline-none transition-transform hover:scale-110"
+              onClick={() => handleClick(i)}
+              onMouseEnter={() => handleMouseEnter(i)}
+              aria-label={`Avaliar com ${i + 1} estrelas`}
+            >
+              {starElement}
+            </button>
+          );
+        }
+
+        return <div key={i}>{starElement}</div>;
+      })}
     </div>
   );
 }

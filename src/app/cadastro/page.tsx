@@ -224,11 +224,12 @@ export default function CadastroPage() {
                     <div className="flex flex-col gap-4">
                       <div className="flex items-center justify-center gap-3 flex-wrap">
                         {genericAvatars.map((avatar) => (
-                          <div
+                          <button
                             key={avatar.id}
+                            type="button"
                             onClick={() => field.onChange(avatar.id)}
                             className={cn(
-                              'relative cursor-pointer rounded-full overflow-hidden border-2 transition-all hover:scale-105',
+                              'relative cursor-pointer rounded-full overflow-hidden border-2 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary',
                               field.value === avatar.id
                                 ? 'border-primary scale-110 shadow-md'
                                 : 'border-transparent opacity-60',
@@ -247,12 +248,13 @@ export default function CadastroPage() {
                                 <Check className="text-white h-5 w-5" />
                               </div>
                             )}
-                          </div>
+                          </button>
                         ))}
-                        <div
+                        <button
+                          type="button"
                           onClick={() => fileInputRef.current?.click()}
                           className={cn(
-                            'relative cursor-pointer rounded-full overflow-hidden border-2 border-dashed border-muted-foreground/30 h-12 w-12 flex items-center justify-center transition-all hover:border-primary/50',
+                            'relative cursor-pointer rounded-full overflow-hidden border-2 border-dashed border-muted-foreground/30 h-12 w-12 flex items-center justify-center transition-all hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary',
                             isCustomUpload && field.value === selectedPic
                               ? 'border-primary border-solid scale-110 shadow-md'
                               : '',
@@ -275,7 +277,7 @@ export default function CadastroPage() {
                             accept="image/*"
                             onChange={handleFileUpload}
                           />
-                        </div>
+                        </button>
                       </div>
                     </div>
                     <FormMessage />
