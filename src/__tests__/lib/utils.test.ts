@@ -42,4 +42,112 @@ describe('Utility Functions - Unit Tests', () => {
       expect(result).toBe('base extra');
     });
   });
+
+  describe('compressAndResizeImage', () => {
+    let originalImage: typeof global.Image;
+    let createElementSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      // Backup globals
+      originalImage = global.Image;
+
+      // Mock canvas
+      const mockContext = {
+        drawImage: jest.fn(),
+      };
+
+      const mockCanvas = {
+        width: 0,
+        height: 0,
+        getContext: jest.fn().mockReturnValue(mockContext),
+        toDataURL: jest.fn().mockReturnValue('data:image/jpeg;base64,mocked_base64_string'),
+      } as unknown as HTMLCanvasElement;
+
+      createElementSpy = jest.spyOn(document, 'createElement').mockImplementation((tagName) => {
+        if (tagName === 'canvas') return mockCanvas;
+        return document.createElement(tagName);
+      });
+    });
+
+    afterEach(() => {
+      global.Image = originalImage;
+      jest.restoreAllMocks();
+    });
+
+    it('should compress and resize a large image correctly', async () => {
+      // Mock the Image constructor to simulate successful image loading
+      class MockImage {
+        src = '';
+        width = 1600;
+        height = 1200;
+        onload: () => void = () => {};
+        onerror: () => void = () => {};
+
+        // Simular o carregamento instantâneo
+        set src(value: string) {
+          setTimeout(() => this.onload(), 0);
+        }
+      }
+
+      (global as any).Image = MockImage;
+
+      const { compressAndResizeImage } = await import('@/lib/utils');
+
+      const result = await compressAndResizeImage('data:image/png;base64,largeimage', 800, 800);
+
+      // Because width (1600) > height (1200) and > maxWidth (800)
+      // New width should be 800, new height should be 1200 * (800 / 1600) = 600
+      expect(createElementSpy).toHaveBeenCalledWith('canvas');
+      expect(result).toBe('data:image/jpeg;base64,mocked_base64_string');
+    });
+
+    it('should handle image loading errors gracefully', async () => {
+      class MockErrorImage {
+        src = '';
+        width = 0;
+        height = 0;
+        onload: () => void = () => {};
+        onerror: () => void = () => {};
+
+        set _src(value: string) {
+          setTimeout(() => this.onerror(), 0);
+        }
+
+        set src(value: string) {
+          setTimeout(() => this.onerror(), 0);
+        }
+      }
+
+      (global as any).Image = MockErrorImage;
+
+      const { compressAndResizeImage } = await import('@/lib/utils');
+
+      await expect(compressAndResizeImage('invalid_data', 800, 800)).rejects.toThrow(
+        'Falha ao carregar a imagem para compressão',
+      );
+    });
+
+    it('should compress and resize a tall vertical image correctly', async () => {
+      class MockTallImage {
+        src = '';
+        width = 1200;
+        height = 1600;
+        onload: () => void = () => {};
+        onerror: () => void = () => {};
+
+        set src(value: string) {
+          setTimeout(() => this.onload(), 0);
+        }
+      }
+
+      (global as any).Image = MockTallImage;
+
+      const { compressAndResizeImage } = await import('@/lib/utils');
+
+      const result = await compressAndResizeImage('data:image/png;base64,tallimage', 800, 800);
+
+      expect(createElementSpy).toHaveBeenCalledWith('canvas');
+      expect(result).toBe('data:image/jpeg;base64,mocked_base64_string');
+    });
+  });
 });
