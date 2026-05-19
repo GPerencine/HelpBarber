@@ -4,8 +4,6 @@
   <img src="https://img.shields.io/badge/Genkit-AI%20Integration-blue?style=for-the-badge&logo=google-gemini" alt="Genkit" />
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <br />
-  <a href="https://github.com/GPerencine/HelpBarber/actions/workflows/deploy.yml"><img src="https://github.com/GPerencine/HelpBarber/actions/workflows/deploy.yml/badge.svg" alt="CI/CD" /></a>
 </div>
 
 <h1 align="center">✂️ HelpBarber</h1>
@@ -18,11 +16,7 @@
 <strong>Autor:</strong> Gabriel Perencine Lima
 </p>
 <p align="center">
-  <a href="https://helpbarber--studio-5735207536-45873.us-east4.hosted.app/">Acesse o Site Oficial</a> •
-  <a href="#-visão-geral">Visão Geral</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-tecnologias">Tecnologias</a> •
-  <a href="#-como-rodar-localmente">Como Rodar Localmente</a>
+  <a href="https://helpbarber--studio-5735207536-45873.us-east4.hosted.app/">Acesse o Site Oficial</a> 
 </p>
 
 ---

@@ -421,7 +421,7 @@ export default function BarberDashboardPage() {
                 onClick={() => {
                   if (appointmentToCancel?.id) {
                     deleteDocumentNonBlocking(
-                      doc(firestore, 'barbers', user!.uid, 'appointments', appointmentToCancel.id),
+                      doc(firestore, 'barbers', user.uid, 'appointments', appointmentToCancel.id),
                     );
                     deleteDocumentNonBlocking(
                       doc(

@@ -136,15 +136,14 @@ export default function CadastroPage() {
       }
 
       if (isBarber && 'location' in values) {
-        const barberValues = values as BarberFormValues;
-        const address = barberValues.location;
+        const address = values.location;
         const coords = await getCoordinates(address);
         const barberProfile = {
           id: user.uid,
           name: values.name,
           email: values.email,
           location: address,
-          experience: barberValues.experience || 0,
+          experience: values.experience || 0,
           specialties: ['Corte Clássico', 'Barba'],
           services: [
             { id: '1', name: 'Corte Social', price: 45.0, duration: 30 },

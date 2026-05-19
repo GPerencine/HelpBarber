@@ -79,7 +79,7 @@ const SidebarProvider = React.forwardRef<
         }
 
         // This sets the cookie to keep the sidebar state.
-        document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+        document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}; Secure; SameSite=Lax`;
       },
       [setOpenProp, open],
     );
@@ -624,15 +624,21 @@ const SidebarMenuBadge = React.forwardRef<HTMLDivElement, React.ComponentProps<'
 );
 SidebarMenuBadge.displayName = 'SidebarMenuBadge';
 
+// Global counter to cycle skeleton widths deterministically without using Math.random
+let skeletonWidthIndex = 0;
+
 const SidebarMenuSkeleton = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<'div'> & {
     showIcon?: boolean;
   }
 >(({ className, showIcon = false, ...props }, ref) => {
-  // Random width between 50 to 90%.
+  // Rotate width between 50 to 90% deterministically to avoid Math.random Security Hotspot
   const width = React.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`;
+    const widths = ['75%', '60%', '85%', '70%', '80%', '65%', '90%', '55%'];
+    const selected = widths[skeletonWidthIndex % widths.length];
+    skeletonWidthIndex++;
+    return selected;
   }, []);
 
   return (
