@@ -77,14 +77,18 @@ describe('Utility Functions - Unit Tests', () => {
     it('should compress and resize a large image correctly', async () => {
       // Mock the Image constructor to simulate successful image loading
       class MockImage {
-        src = '';
+        private _src = '';
         width = 1600;
         height = 1200;
         onload: () => void = () => {};
         onerror: () => void = () => {};
 
-        // Simular o carregamento instantâneo
+        get src() {
+          return this._src;
+        }
+
         set src(value: string) {
+          this._src = value;
           setTimeout(() => this.onload(), 0);
         }
       }
@@ -103,17 +107,18 @@ describe('Utility Functions - Unit Tests', () => {
 
     it('should handle image loading errors gracefully', async () => {
       class MockErrorImage {
-        src = '';
+        private _src = '';
         width = 0;
         height = 0;
         onload: () => void = () => {};
         onerror: () => void = () => {};
 
-        set _src(value: string) {
-          setTimeout(() => this.onerror(), 0);
+        get src() {
+          return this._src;
         }
 
         set src(value: string) {
+          this._src = value;
           setTimeout(() => this.onerror(), 0);
         }
       }
@@ -129,13 +134,18 @@ describe('Utility Functions - Unit Tests', () => {
 
     it('should compress and resize a tall vertical image correctly', async () => {
       class MockTallImage {
-        src = '';
+        private _src = '';
         width = 1200;
         height = 1600;
         onload: () => void = () => {};
         onerror: () => void = () => {};
 
+        get src() {
+          return this._src;
+        }
+
         set src(value: string) {
+          this._src = value;
           setTimeout(() => this.onload(), 0);
         }
       }
