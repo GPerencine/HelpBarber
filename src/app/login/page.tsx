@@ -80,7 +80,7 @@ export default function LoginPage() {
       const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
       const currentUser = userCredential.user;
 
-      const idTokenResult = await currentUser.getIdTokenResult();
+      const idTokenResult = await currentUser.getIdTokenResult(true);
       if (idTokenResult.claims.admin === true) {
         toast({ title: 'Acesso Administrativo' });
         router.push('/admin');

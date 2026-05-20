@@ -76,7 +76,7 @@ export const FirebaseProvider = ({
 
       // Admin Bypass via Custom Claims (definido via Firebase Admin SDK)
       try {
-        const idTokenResult = await currentUser.getIdTokenResult();
+        const idTokenResult = await currentUser.getIdTokenResult(true);
         if (idTokenResult.claims.admin === true) {
           if (isMounted.current) {
             setState({
