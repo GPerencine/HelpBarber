@@ -10,7 +10,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "node scripts/patch-zod-exports.js"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -112,7 +113,8 @@
     "body-parser": "1.20.3",
     "express": "4.21.2",
     "postcss": "8.5.14",
-    "qs": "6.15.2"
+    "qs": "6.15.2",
+    "zod-to-json-schema": "^3.25.2"
   },
   "engines": {
     "node": "24.x"
