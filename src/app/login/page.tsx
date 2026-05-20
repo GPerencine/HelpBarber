@@ -88,9 +88,10 @@ export default function LoginPage() {
       }
 
       toast({ title: 'Bem-vindo de volta!' });
-    } catch (err: any) {
+    } catch (err) {
+      const firebaseError = err as import('firebase/app').FirebaseError;
       setError(
-        err.code === 'auth/invalid-credential'
+        firebaseError.code === 'auth/invalid-credential'
           ? 'Email ou senha inválidos.'
           : 'Erro na autenticação.',
       );
@@ -105,7 +106,7 @@ export default function LoginPage() {
     try {
       await sendPasswordResetEmail(auth, email);
       toast({ title: 'E-mail de redefinição enviado' });
-    } catch (err: any) {
+    } catch (err) {
       toast({ variant: 'destructive', title: 'Erro ao processar solicitação' });
     } finally {
       setIsResetting(false);

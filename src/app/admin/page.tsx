@@ -29,6 +29,7 @@ import { useToast } from '@/hooks/use-toast';
 import type { Barber, Review } from '@/models/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Rating from '@/components/shared/rating';
+import { useAdminData } from '@/hooks/use-admin-data';
 
 interface Customer {
   id: string;
@@ -46,7 +47,7 @@ export default function AdminPage() {
   const { toast } = useToast();
 
   const { isAdmin, isUserLoading } = useUser();
-  const [isDataLoading, setIsDataLoading] = useState(true);
+  const { barbers, users, enrichedReviews, isDataLoading } = useAdminData();
   const [itemToDelete, setItemToDelete] = useState<DeleteItem | null>(null);
   const [isMigrating, setIsMigrating] = useState(false);
 
@@ -55,39 +56,6 @@ export default function AdminPage() {
       router.push('/login');
     }
   }, [isAdmin, isUserLoading, router]);
-
-  const barbersQuery = useMemo(() => {
-    if (!firestore || !isAdmin) return null;
-    return collection(firestore, 'barbers');
-  }, [firestore, isAdmin]);
-  const { data: barbers, isLoading: barbersLoading } = useCollection<Barber>(barbersQuery);
-
-  const usersQuery = useMemo(() => {
-    if (!firestore || !isAdmin) return null;
-    return collection(firestore, 'users');
-  }, [firestore, isAdmin]);
-  const { data: users, isLoading: usersLoading } = useCollection<Customer>(usersQuery);
-
-  const reviewsQuery = useMemo(() => {
-    if (!firestore || !isAdmin) return null;
-    return query(collectionGroup(firestore, 'reviews'));
-  }, [firestore, isAdmin]);
-  const { data: allReviews, isLoading: reviewsLoading } = useCollection<Review>(reviewsQuery);
-
-  const enrichedReviews = useMemo(() => {
-    if (!allReviews || !barbers) return [];
-    const barbersMap = new Map(barbers.map((b) => [b.id, b.name]));
-    return allReviews.map((review) => ({
-      ...review,
-      barberName: barbersMap.get(review.barberId) || 'Barbeiro Desconhecido',
-    }));
-  }, [allReviews, barbers]);
-
-  useEffect(() => {
-    if (isAdmin && !barbersLoading && !usersLoading && !reviewsLoading) {
-      setIsDataLoading(false);
-    }
-  }, [isAdmin, barbersLoading, usersLoading, reviewsLoading]);
 
   const handleDelete = async () => {
     if (!firestore || !itemToDelete) return;
@@ -146,7 +114,7 @@ export default function AdminPage() {
           successCount++;
         }
       } catch (e) {
-        console.error(`Erro ao geocodificar barbeiro ${barber.name}:`, e);
+        import('@sentry/nextjs').then(({ captureException }) => captureException(e));
       }
     }
 

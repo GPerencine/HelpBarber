@@ -42,11 +42,12 @@ O **HelpBarber** é uma plataforma SaaS (Software as a Service) moderna projetad
 
 A aplicação foi construída com as tecnologias mais modernas do mercado:
 
-- **Frontend:** Next.js 15.1.7 (App Router), React 18.3.1, TypeScript 5.7.2, Tailwind CSS 3.4.16, shadcn/ui, Framer Motion.
-- **Backend & BaaS:** Firebase 11.1.0 (Firestore NoSQL, Authentication, Storage, App Hosting).
+- **Frontend:** Next.js 15.1.7 (App Router), React 18.3.1, TypeScript 5.7.2, Tailwind CSS 3.4.16, shadcn/ui.
+- **Backend & BaaS:** Firebase 11.5.0 (Firestore NoSQL, Authentication, Storage, App Hosting).
 - **Inteligência Artificial:** Google Firebase Genkit 1.20.0, Gemini 2.5 Flash.
+- **Monitoramento:** Sentry (captura automática de exceções em produção).
 - **Integrações:** Google Maps JavaScript API (Geocoding & Markers).
-- **Qualidade de Código & CI/CD:** ESLint 9.17.0, Prettier 3.3.3, Zod 3.24.1, Jest 29.7.0, React Testing Library 14.3.1, GitHub Actions (Integração Contínua), SonarCloud (Análise Estática e Qualidade).
+- **Qualidade de Código & CI/CD:** ESLint 9.17.0, Prettier 3.8.3, Zod 3.24.1, Jest 29.7.0, React Testing Library 14.3.1, GitHub Actions (Integração Contínua), SonarCloud (Análise Estática e Qualidade).
 
 ---
 
@@ -70,13 +71,31 @@ graph TD
   Firestore --> Rules[Security Rules]
 ```
 
+## 🗂️ Estrutura de Pastas
+
+```
+src/
+├── ai/              # Flows de IA (Genkit + Gemini)
+├── app/             # Pages e rotas (Next.js App Router)
+├── components/      # Componentes React
+│   ├── barbers/     # Listagem, mapa, agendamento, avaliações
+│   ├── layout/      # Header, ThemeProvider, ThemeToggle
+│   ├── shared/      # Componentes genéricos (Rating, etc.)
+│   ├── style-advisor/ # Consultor de estilo com IA
+│   └── ui/          # shadcn/ui (não editar manualmente)
+├── firebase/        # Config, Provider e hooks do Firebase
+├── hooks/           # Hooks customizados de regras de negócio
+├── lib/             # Utilitários, placeholder-images, storage
+└── models/          # Tipos TypeScript centrais (types.ts)
+```
+
 ## ⚙️ Como Rodar Localmente
 
 Siga o passo a passo abaixo para rodar o projeto em sua máquina:
 
 ### 1. Pré-requisitos
 
-- Node.js 18+ instalado.
+- Node.js 24+ instalado.
 - Conta no Firebase configurada (Firestore, Storage e Authentication habilitados).
 - Chaves de API do Google Maps e do Google AI Studio (Gemini).
 
@@ -106,7 +125,10 @@ NEXT_PUBLIC_FIREBASE_APP_ID="seu-app-id"
 
 # Integrações de APIs Externas
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="sua-chave-maps"
-GOOGLE_GENAI_API_KEY="sua-chave-gemini"
+GEMINI_API_KEY="sua-chave-gemini"
+
+# --- Sentry (monitoramento de erros) ---
+NEXT_PUBLIC_SENTRY_DSN=https://seu-dsn@sentry.io/...
 ```
 
 ### 4. Executando o Projeto
@@ -123,8 +145,16 @@ Acesse [http://localhost:3000](http://localhost:3000) no seu navegador para ver 
 O projeto conta com uma suíte de testes unitários e de integração implementados com Jest para garantir a integridade das regras de negócio.
 
 ```bash
+# Executar testes
 npm run test
+
+# Cobertura de testes
+npm run test:coverage
 ```
+
+## 🛡️ Monitoramento de Erros
+
+O projeto utiliza **Sentry** para captura automática de exceções em produção. Erros críticos (incluindo falhas da IA) são reportados via `captureException`.
 
 ---
 

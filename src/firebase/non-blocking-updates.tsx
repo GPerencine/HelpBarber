@@ -8,6 +8,7 @@ import {
   CollectionReference,
   DocumentReference,
   SetOptions,
+  DocumentData,
 } from 'firebase/firestore';
 import { errorEmitter } from '@/firebase/error-emitter';
 import { FirestorePermissionError } from '@/firebase/errors';
@@ -16,7 +17,11 @@ import { FirestorePermissionError } from '@/firebase/errors';
  * Inicia uma operação setDoc para uma referência de documento.
  * NÃO aguarda internamente a operação de escrita.
  */
-export function setDocumentNonBlocking(docRef: DocumentReference, data: any, options: SetOptions) {
+export function setDocumentNonBlocking(
+  docRef: DocumentReference,
+  data: DocumentData,
+  options: SetOptions,
+) {
   setDoc(docRef, data, options).catch((error) => {
     errorEmitter.emit(
       'permission-error',
@@ -35,7 +40,7 @@ export function setDocumentNonBlocking(docRef: DocumentReference, data: any, opt
  * NÃO aguarda internamente a operação de escrita.
  * Retorna a Promise para a nova referência do documento, mas tipicamente não é aguardada pelo chamador.
  */
-export function addDocumentNonBlocking(colRef: CollectionReference, data: any) {
+export function addDocumentNonBlocking(colRef: CollectionReference, data: DocumentData) {
   const promise = addDoc(colRef, data).catch((error) => {
     errorEmitter.emit(
       'permission-error',
@@ -53,7 +58,7 @@ export function addDocumentNonBlocking(colRef: CollectionReference, data: any) {
  * Inicia uma operação updateDoc para uma referência de documento.
  * NÃO aguarda internamente a operação de escrita.
  */
-export function updateDocumentNonBlocking(docRef: DocumentReference, data: any) {
+export function updateDocumentNonBlocking(docRef: DocumentReference, data: DocumentData) {
   updateDoc(docRef, data).catch((error) => {
     errorEmitter.emit(
       'permission-error',

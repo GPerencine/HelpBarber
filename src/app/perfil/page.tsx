@@ -23,7 +23,11 @@ import { useAuth } from '@/firebase';
 
 export default function PerfilPage() {
   const { user, isUserLoading, isBarber, isAdmin, profileData: rawProfileData } = useUser();
-  const profileData = rawProfileData as any; // Cast to any to avoid "property does not exist" error on union type in some environments
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  const profileData = rawProfileData as
+    | import('@/models/types').Customer
+    | import('@/models/types').Barber
+    | null;
   const auth = useAuth();
   const router = useRouter();
   const firestore = useFirestore();
@@ -84,7 +88,7 @@ export default function PerfilPage() {
           const downloadUrl = await uploadBase64ToStorage(storage, path, resized);
           handleUpdateAvatar(downloadUrl);
         } catch (error) {
-          console.error('Erro ao fazer upload da imagem:', error);
+          import('@sentry/nextjs').then(({ captureException }) => captureException(error));
           toast({
             variant: 'destructive',
             title: 'Erro no upload',

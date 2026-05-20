@@ -1,11 +1,10 @@
 import { genkit } from 'genkit';
 import { googleAI } from '@genkit-ai/google-genai';
+import * as Sentry from '@sentry/nextjs';
 
 // Verifica se a chave de API está presente no ambiente
 if (typeof window === 'undefined' && !process.env.GEMINI_API_KEY) {
-  console.error(
-    'ERRO: A variável de ambiente GEMINI_API_KEY não foi encontrada. A IA não funcionará até que esta chave seja configurada nas configurações do seu projeto no Firebase App Hosting.',
-  );
+  Sentry.captureException(new Error('Genkit initialization error'));
 }
 
 export const ai = genkit({

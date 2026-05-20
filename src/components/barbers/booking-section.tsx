@@ -35,7 +35,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-const allTimes = [
+const DEFAULT_TIMES = [
   '09:00',
   '09:45',
   '10:30',
@@ -56,6 +56,7 @@ export default function BookingSection({
   barber: Barber;
   appointments: Appointment[];
 }) {
+  const allTimes = barber.availableHours ?? DEFAULT_TIMES;
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedServiceName, setSelectedServiceName] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -90,7 +91,10 @@ export default function BookingSection({
     const start = set(date, { hours: h, minutes: m, seconds: 0, milliseconds: 0 });
 
     const customerName =
-      (profileData as any)?.name || user.displayName || user.email?.split('@')[0] || 'Cliente';
+      (profileData as { name?: string } | null)?.name ??
+      user.displayName ??
+      user.email?.split('@')[0] ??
+      'Cliente';
     const appointmentId = uuidv4();
 
     const app: Appointment = {

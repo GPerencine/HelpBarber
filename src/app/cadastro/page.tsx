@@ -167,8 +167,9 @@ export default function CadastroPage() {
         router.push('/barbers');
       }
       toast({ title: 'Bem-vindo!', description: 'Sua conta foi criada com sucesso.' });
-    } catch (error: any) {
-      setError(error.message || 'Erro ao criar conta.');
+    } catch (error) {
+      const firebaseError = error as import('firebase/app').FirebaseError;
+      setError(firebaseError.message || 'Erro ao criar conta.');
     } finally {
       setIsLoading(false);
     }

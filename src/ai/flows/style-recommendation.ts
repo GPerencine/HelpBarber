@@ -59,7 +59,19 @@ const recommendStyleFlow = ai.defineFlow(
     outputSchema: StyleRecommendationOutputSchema,
   },
   async (input) => {
-    const { output } = await prompt(input);
-    return output!;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const { output } = await prompt(input);
+      if (!output) throw new Error('AI retornou resposta vazia');
+      return output;
+    } catch (err) {
+      if ((err as Error).name === 'AbortError') {
+        throw new Error('A IA demorou muito para responder. Tente novamente.');
+      }
+      throw err;
+    } finally {
+      clearTimeout(timeout);
+    }
   },
 );

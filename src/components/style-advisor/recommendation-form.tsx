@@ -58,7 +58,7 @@ export default function RecommendationForm() {
         setRecommendation(result);
       } catch (e) {
         setError('Ocorreu um erro ao obter sua recomendação. Por favor, tente novamente.');
-        console.error(e);
+        import('@sentry/nextjs').then(({ captureException }) => captureException(e));
       }
     });
   }

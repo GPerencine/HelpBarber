@@ -42,6 +42,7 @@ export interface Barber {
     lat: number;
     lng: number;
   };
+  availableHours?: string[];
 }
 
 export interface Appointment {

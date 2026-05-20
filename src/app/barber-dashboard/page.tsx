@@ -51,6 +51,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
+import { useBarberDashboard } from '@/hooks/use-barber-dashboard';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { compressAndResizeImage } from '@/lib/utils';
 
@@ -75,32 +76,7 @@ export default function BarberDashboardPage() {
   const [isAvatarDialogOpen, setIsAvatarDialogOpen] = useState(false);
 
   const barber = profileData as Barber;
-  const today = useMemo(() => startOfDay(new Date()).toISOString(), []);
-
-  // Consultas ao Firestore
-  const appointmentsQuery = useMemo(
-    () =>
-      !firestore || !user
-        ? null
-        : query(
-            collection(firestore, 'barbers', user.uid, 'appointments'),
-            where('startTime', '>=', today),
-            orderBy('startTime', 'asc'),
-          ),
-    [firestore, user, today],
-  );
-
-  const reviewsQuery = useMemo(
-    () =>
-      !firestore || !user
-        ? null
-        : query(collection(firestore, 'barbers', user.uid, 'reviews'), orderBy('date', 'desc')),
-    [firestore, user],
-  );
-
-  const { data: appointments, isLoading: appLoading } =
-    useCollection<Appointment>(appointmentsQuery);
-  const { data: reviews, isLoading: revLoading } = useCollection<Review>(reviewsQuery);
+  const { appointments, appLoading, reviews, revLoading } = useBarberDashboard();
 
   const services = barber?.services || [];
   const form = useForm<z.infer<typeof schema>>({

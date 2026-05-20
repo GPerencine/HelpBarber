@@ -65,7 +65,11 @@ export default function ReviewsSection({ barberId }: ReviewsSectionProps) {
     if (!user || !firestore) return;
     setIsSubmitting(true);
 
-    const authorName = (profileData as any)?.name || user.displayName || user.email || 'Anônimo';
+    const authorName =
+      (profileData as { name?: string } | null)?.name ??
+      user.displayName ??
+      user.email ??
+      'Anônimo';
 
     const newReviewData: Omit<Review, 'id'> = {
       barberId: barberId,
