@@ -1,163 +1,115 @@
 <div align="center">
-  <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js" />
-  <img src="https://img.shields.io/badge/Firebase-App%20Hosting-orange?style=for-the-badge&logo=firebase" alt="Firebase" />
-  <img src="https://img.shields.io/badge/Genkit-AI%20Integration-blue?style=for-the-badge&logo=google-gemini" alt="Genkit" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+
+# ✂️ HelpBarber
+
+<p>
+  <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Firebase-orange?style=for-the-badge&logo=firebase&logoColor=white" />
+  <img src="https://img.shields.io/badge/Gemini_AI-4285F4?style=for-the-badge&logo=google&logoColor=white" />
+  <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" />
+  <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" />
+</p>
+
+**Plataforma SaaS para barbearias com agendamento em tempo real e consultor de estilo com IA generativa.**
+
+[🌐 Acessar o site](https://helpbarber--studio-5735207536-45873.us-east4.hosted.app/)
+
 </div>
 
-<h1 align="center">✂️ HelpBarber</h1>
-<p align="center">
-  <strong>Gestão Inteligente e Estilo com Inteligência Artificial para Barbearias</strong>
-</p>
-<p>
-<strong>Projeto de Extensão Universitária | USCS - Universidade Municipal de São Caetano do Sul</strong><br>
-<strong>Curso:</strong> Análise e Desenvolvimento de Sistemas <br>
-<strong>Autor:</strong> Gabriel Perencine Lima
-</p>
-<p align="center">
-  <a href="https://helpbarber--studio-5735207536-45873.us-east4.hosted.app/">Acesse o Site Oficial</a> 
-</p>
+---
+
+<div align="center">
+  Desenvolvido por <strong>Gabriel Perencine Lima</strong>
+</div>
+
+## Sobre
+
+HelpBarber é uma plataforma SaaS desenvolvida como projeto de extensão universitário na **USCS — Universidade Municipal de São Caetano do Sul** (Análise e Desenvolvimento de Sistemas).
+
+O sistema oferece agendamento em tempo real, localização de barbearias via mapa interativo e um consultor de estilo alimentado pelo **Gemini 2.5 Flash**, que analisa o formato de rosto e sugere cortes personalizados. O painel administrativo é protegido por autenticação Firebase com Custom Claims e JWT.
 
 ---
 
-## 🚀 Visão Geral
+## Funcionalidades
 
-O **HelpBarber** é uma plataforma SaaS (Software as a Service) moderna projetada para revolucionar o ecossistema de barbearias. A solução integra gestão de agendamentos em tempo real, geolocalização e um **Consultor de Estilo baseado em Inteligência Artificial Generativa (Gemini 2.5 Flash)**. O objetivo é proporcionar uma experiência personalizada e fluida para o cliente final, enquanto maximiza a eficiência operacional do barbeiro.
-
----
-
-## ✨ Features Principais
-
-- 🤖 **Consultor de Estilo com IA:** Análise de formato de rosto e sugestão de cortes usando Google Genkit e Gemini 2.5 Flash.
-- 📅 **Agendamento em Tempo Real:** Sistema robusto e reativo para marcação de horários.
-- 🗺️ **Geolocalização:** Integração com Google Maps API para exibir barbeiros próximos em um mapa interativo.
-- 🛡️ **Painel Administrativo Seguro:** Controle de acessos robusto via Firebase Custom Claims e JWT.
-- 📱 **Interface Premium e Responsiva:** Design system baseado em Tailwind CSS, shadcn/ui e animações nativas.
-- 🌓 **Dark/Light Mode:** Total suporte a temas, preservando a identidade visual.
+| Feature                       | Descrição                                                                               |
+| ----------------------------- | --------------------------------------------------------------------------------------- |
+| 🤖 Consultor de Estilo com IA | Análise de formato de rosto e sugestão de cortes via Gemini 2.5 Flash + Firebase Genkit |
+| 📅 Agendamento em Tempo Real  | Sistema reativo de marcação de horários com Firestore                                   |
+| 🗺️ Geolocalização             | Mapa interativo com barbeiros próximos via Google Maps API                              |
+| 🛡️ Painel Administrativo      | Controle de acesso via Firebase Custom Claims + JWT                                     |
+| 🌓 Dark / Light Mode          | Suporte completo a temas com persistência                                               |
+| 📱 Design Responsivo          | Interface mobile-first com Tailwind CSS e shadcn/ui                                     |
 
 ---
 
-## 🛠️ Tecnologias
+## Stack
 
-A aplicação foi construída com as tecnologias mais modernas do mercado:
-
-- **Frontend:** Next.js 15.1.7 (App Router), React 18.3.1, TypeScript 5.7.2, Tailwind CSS 3.4.16, shadcn/ui.
-- **Backend & BaaS:** Firebase 11.5.0 (Firestore NoSQL, Authentication, Storage, App Hosting).
-- **Inteligência Artificial:** Google Firebase Genkit 1.20.0, Gemini 2.5 Flash.
-- **Monitoramento:** Sentry (captura automática de exceções em produção).
-- **Integrações:** Google Maps JavaScript API (Geocoding & Markers).
-- **Qualidade de Código & CI/CD:** ESLint 9.17.0, Prettier 3.8.3, Zod 3.24.1, Jest 29.7.0, React Testing Library 14.3.1, GitHub Actions (Integração Contínua), SonarCloud (Análise Estática e Qualidade).
+| Camada            | Tecnologia                                                 |
+| ----------------- | ---------------------------------------------------------- |
+| **Framework**     | Next.js 15 (App Router), React 18, TypeScript 5            |
+| **BaaS**          | Firebase (Firestore, Authentication, Storage, App Hosting) |
+| **IA**            | Google Firebase Genkit 1.20, Gemini 2.5 Flash              |
+| **UI**            | Tailwind CSS 3, shadcn/ui                                  |
+| **Monitoramento** | Sentry (captura automática de exceções em produção)        |
+| **Testes**        | Jest 29, React Testing Library 14                          |
+| **Qualidade**     | ESLint 9, Prettier, Zod, SonarCloud, GitHub Actions        |
 
 ---
 
-## 🏛️ Arquitetura e Engenharia
-
-O projeto adota o padrão **Model-View-Controller (MVC) adaptado para aplicações React modernas**, garantindo separação de preocupações e escalabilidade:
-
-- **Model (Dados):** Schemas e tipos definidos centralmente (`src/models/types.ts`) validados fortemente com **Zod**.
-- **View (Interface):** Componentes atômicos e acessíveis, separados logicamente na pasta `src/components`.
-- **Controller (Regras de Negócio):** Hooks customizados do Firebase para abstração e fluxos de IA modulares em `src/ai/flows`.
-- **Segurança:** A autenticação e a gestão de papéis utilizam validação rigorosa de _Custom Claims_ no contexto global (`FirebaseProvider`), eliminando antigas vulnerabilidades baseadas em `sessionStorage`.
-
-### Diagrama de Arquitetura
-
-```mermaid
-graph TD
-  Client[Next.js App] --> Auth[Firebase Auth]
-  Client --> Firestore[Firestore Database]
-  Client --> Genkit[Genkit AI Studio]
-  Genkit --> Gemini[Gemini 2.5 Flash]
-  Firestore --> Rules[Security Rules]
-```
-
-## 🗂️ Estrutura de Pastas
+## Arquitetura
 
 ```
 src/
 ├── ai/              # Flows de IA (Genkit + Gemini)
-├── app/             # Pages e rotas (Next.js App Router)
-├── components/      # Componentes React
-│   ├── barbers/     # Listagem, mapa, agendamento, avaliações
-│   ├── layout/      # Header, ThemeProvider, ThemeToggle
-│   ├── shared/      # Componentes genéricos (Rating, etc.)
+├── app/             # Rotas — Next.js App Router
+├── components/
+│   ├── barbers/     # Listagem, mapa, agendamento e avaliações
 │   ├── style-advisor/ # Consultor de estilo com IA
-│   └── ui/          # shadcn/ui (não editar manualmente)
-├── firebase/        # Config, Provider e hooks do Firebase
-├── hooks/           # Hooks customizados de regras de negócio
-├── lib/             # Utilitários, placeholder-images, storage
-└── models/          # Tipos TypeScript centrais (types.ts)
+│   └── ui/          # shadcn/ui
+├── firebase/        # Config, Provider e hooks
+├── hooks/           # Hooks de regras de negócio
+└── models/          # Tipos TypeScript centrais (Zod schemas)
 ```
 
-## ⚙️ Como Rodar Localmente
-
-Siga o passo a passo abaixo para rodar o projeto em sua máquina:
-
-### 1. Pré-requisitos
-
-- Node.js 24+ instalado.
-- Conta no Firebase configurada (Firestore, Storage e Authentication habilitados).
-- Chaves de API do Google Maps e do Google AI Studio (Gemini).
-
-### 2. Instalação
-
-```bash
-# Clone o repositório
-git clone https://github.com/GPerencine/HelpBarber.git
-cd HelpBarber
-
-# Instale as dependências (recomendado usar a flag devido a possíveis dependências de UI)
-npm install --legacy-peer-deps
+```mermaid
+graph TD
+  Client[Next.js App] --> Auth[Firebase Auth + Custom Claims]
+  Client --> Firestore[Firestore Database]
+  Client --> Genkit[Firebase Genkit]
+  Genkit --> Gemini[Gemini 2.5 Flash]
+  Firestore --> Rules[Security Rules]
 ```
-
-### 3. Variáveis de Ambiente
-
-Crie um arquivo `.env.local` na raiz do projeto com as seguintes configurações:
-
-```env
-# Chaves obrigatórias do Firebase
-NEXT_PUBLIC_FIREBASE_API_KEY="sua-api-key"
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="seu-projeto.firebaseapp.com"
-NEXT_PUBLIC_FIREBASE_PROJECT_ID="seu-projeto"
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="seu-projeto.firebasestorage.app"
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="seu-sender-id"
-NEXT_PUBLIC_FIREBASE_APP_ID="seu-app-id"
-
-# Integrações de APIs Externas
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="sua-chave-maps"
-GEMINI_API_KEY="sua-chave-gemini"
-
-# --- Sentry (monitoramento de erros) ---
-NEXT_PUBLIC_SENTRY_DSN=https://seu-dsn@sentry.io/...
-```
-
-### 4. Executando o Projeto
-
-```bash
-# Inicie o servidor de desenvolvimento
-npm run dev
-```
-
-Acesse [http://localhost:3000](http://localhost:3000) no seu navegador para ver o sistema rodando.
-
-### 5. Executando os Testes Automatizados
-
-O projeto conta com uma suíte de testes unitários e de integração implementados com Jest para garantir a integridade das regras de negócio.
-
-```bash
-# Executar testes
-npm run test
-
-# Cobertura de testes
-npm run test:coverage
-```
-
-## 🛡️ Monitoramento de Erros
-
-O projeto utiliza **Sentry** para captura automática de exceções em produção. Erros críticos (incluindo falhas da IA) são reportados via `captureException`.
 
 ---
 
-<p align="center">
-  Feito com dedicação para inovar a estética masculina através da engenharia de software de ponta. 🚀
-</p>
+## Configuração Local
+
+**Pré-requisitos:** Node.js 20+, projeto Firebase criado (Firestore, Auth e Storage ativos), chaves do Google Maps e Gemini.
+
+```bash
+git clone https://github.com/GPerencine/HelpBarber.git
+cd HelpBarber
+npm install
+```
+
+Crie `.env.local` na raiz:
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+GEMINI_API_KEY=
+```
+
+```bash
+npm run dev        # http://localhost:3000
+npm test           # Suíte de testes
+npm run test:coverage
+```
+
+---
+
+## CI/CD
+
+A cada push ou PR na `main`, o GitHub Actions executa lint, testes com cobertura e build de produção. O SonarCloud realiza análise estática contínua com Quality Gate integrado.
